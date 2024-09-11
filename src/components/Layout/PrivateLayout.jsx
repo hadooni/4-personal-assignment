@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../api/authContext";
+import { AuthContext } from "../../api/AuthContext";
 
 const PrivateLayout = () => {
   const { logout } = useContext(AuthContext);
