@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { AuthContext } from "../../api/authContext";
+import { AuthContext } from "../../api/AuthContext";
 import PrivateLayout from "./PrivateLayout";
 import PublicLayout from "./PublicLayout";
 import { Link, Outlet } from "react-router-dom";
