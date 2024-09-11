@@ -4,6 +4,7 @@ import { createTestResult } from "../api/testResults";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import { description } from "../data/mbtiDescriptions";
 
 const Test = () => {
   const navigate = useNavigate();
@@ -33,6 +34,7 @@ const Test = () => {
       answers,
       date: new Date().toLocaleString(),
       visibility: true,
+      description: description[result],
     };
     setResult(resultData);
     await createTestResult(resultData);
@@ -46,19 +48,20 @@ const Test = () => {
           <TestForm onSubmit={handleTestSubmit} />
         </div>
       ) : (
-        <div>
-          <div className="flex min-h-full justify-center px-6 py-12">
-            <div className="sm:mx-auto ">
-              <h1>
-                {result.nickname}님의 테스트 결과 : {result.result}
-              </h1>
-              <button
-                onClick={() => navigate("/resultlist")}
-                className="block w-full rounded-md py-3 bg-yellow-400 pl-3 mb-5"
-              >
-                결과 페이지로 이동하기
-              </button>
-            </div>
+        <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm bg-gray-800 text-white p-4 rounded-2xl">
+            <h1 className="mb-4">
+              {result.nickname}님의 테스트 결과 :{" "}
+              <span className="text-yellow-400">{result.result}</span>
+            </h1>
+            <p className="mb-4">{result.description.title}</p>
+            <p>{result.description.contents}</p>
+            <button
+              onClick={() => navigate("/resultlist")}
+              className="block w-full rounded-md py-3 bg-yellow-400 pl-3 text-black mt-6 mb-2"
+            >
+              결과 페이지로 이동하기
+            </button>
           </div>
         </div>
       )}

@@ -72,8 +72,8 @@ const Profile = () => {
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-        <h1 className="my-10 text-center text-2xl font-bold">프로필 수정</h1>
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm bg-slate-100 p-6 rounded-2xl">
+        <h1 className="my-5 text-center text-2xl font-bold">프로필 수정</h1>
         <form onSubmit={handleNicknameChange}>
           <h3 className="mb-3 ml-2">닉네임</h3>
           <input

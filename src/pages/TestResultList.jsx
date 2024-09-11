@@ -1,21 +1,28 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getTestResults } from "../api/testResults";
+import { description } from "../data/mbtiDescriptions";
+import { UserContext } from "../context/UserContext";
 
 const TestResultList = () => {
   const [testResult, setTestResult] = useState({});
+  const { user } = useContext(UserContext);
+  console.log("testResult :>> ", testResult);
+  console.log("user :>> ", user);
+
+  const getResult = async () => {
+    const result = await getTestResults();
+
+    setTestResult(
+      result.map((item) => ({
+        ...item,
+        description: description[item.result],
+      }))
+    );
+  };
 
   useEffect(() => {
-    const getResult = async () => {
-      const result = await getTestResults();
-      setTestResult(result);
-    };
     getResult();
   }, []);
-  console.log("testResult :>> ", testResult);
-
-  if (testResult.length === 0) {
-    return <div>테스트 데이터가 없습니다.</div>;
-  }
 
   return (
     <div className="flex flex-col min-h-full items-center py-12">
@@ -31,6 +38,8 @@ const TestResultList = () => {
                 <p>{obj.date}</p>
               </div>
               <p className="text-yellow-400">{obj.result}</p>
+              <p className="my-2">{obj.description?.title}</p>
+              <p>{obj.description?.contents}</p>
             </div>
           );
         })
